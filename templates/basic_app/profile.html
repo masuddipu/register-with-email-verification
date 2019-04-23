@@ -1,0 +1,14 @@
+{% extends "basic_app/base.html" %}
+
+{% block title_block %}PROFILE{% endblock title_block %}
+
+{% block body_block %}
+  <div class="jumbotron">
+    <h1>User Info:</h1>
+    <h3>Username: {{ user.username }}</h3>
+    <h3>Email: {{ user.email }}</h3>
+    <h3>Portfolio Site: {{ user.userprofile.portfolio_site }}</h3>
+    <h3>Photo:</h3>
+    <img src="{{ user.userprofile.profile_pic.url }}" alt="{{ user.username }}" width="280">
+  </div>
+{% endblock body_block %}

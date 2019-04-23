@@ -1,0 +1,39 @@
+{% extends "basic_app/base.html" %}
+
+{% block title_block %}Register{% endblock title_block %}
+
+{% block body_block %}
+  <div class="jumbotron">
+    {% if registered %}
+      <h1>Thank You for registering.</h1>
+    {% else %}
+      <h1>Register Here!</h1>
+      <h3>Fill out the form:</h3>
+      <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        {% for field in user_form %}
+          <p>
+            {{ field.label_tag }}<br>
+            {{ field }}
+            {% for error in field.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+          </p>
+        {% endfor %}
+        {% for field in profile_form %}
+          <p>
+            {{ field.label_tag }}<br>
+            {{ field }}
+            {% if field.help_text %}
+              <small style="display: none">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+          </p>
+        {% endfor %}
+        <input type="submit" class="btn btn-primary" value="Register">
+      </form>
+    {% endif %}
+  </div>
+{% endblock body_block %}
